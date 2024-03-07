@@ -1,8 +1,6 @@
 # Re-TAG: Retrieval-Augmented Scene Graph Generation via Multi-Prototype Learning
 
-This repository contains the official code implementation for the paper [Prototype-based Embedding Network for Scene Graph Generation](https://arxiv.org/abs/2303.07096).
 
-## Installation
 Check [INSTALL.md](./INSTALL.md) for installation instructions.
 
 ## Dataset

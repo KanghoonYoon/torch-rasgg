@@ -1,0 +1,12 @@
+## code composition
+build/
+datasets/
+
+## running code
+checkpoints/
+
+__pycache__
+
+predicate_dict.pkl
+
+maskrcnn_benchmark.egg-info/
