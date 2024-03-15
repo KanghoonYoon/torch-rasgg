@@ -1,6 +1,6 @@
 # Re-TAG: Retrieval-Augmented Scene Graph Generation via Multi-Prototype Learning
 
-We refer to the implementation of PE-Net. 
+We refer to the implementation of PE-Net [PENet](https://github.com/VL-Group/PENET?tab=readme-ov-file). 
 
 Check [INSTALL.md](./INSTALL.md) for installation instructions.
 
@@ -41,5 +41,4 @@ We use the `rel_nms` [operation](./maskrcnn_benchmark/data/datasets/evaluation/v
 
 
 ## Acknowledgement
-
 The code is implemented based on [Scene-Graph-Benchmark.pytorch](https://github.com/KaihuaTang/Scene-Graph-Benchmark.pytorch).
