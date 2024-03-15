@@ -9,12 +9,11 @@ Check [DATASET.md](./DATASET.md) for instructions of dataset preprocessing.
 
 
 ## Train
-ReTAG first train PE-Net, and then constructs memory bank.
+ReTAG requires the pre-trained PE-Net and memory bank, which is populated with the relation embedding of training dataset.
 
-If you want to skip the pre-training stage, and memory bank construction, please download the pre-trained model in this anonymous drive [link](https://).
+Please download the pre-trained model in this anonymous drive [link](https://).
 
-
-After preparing the pre-trained PE-Net, and memory bank. You can train ReTAG using [scripts](./scripts/predcls_train_retag.sh)
+You can train ReTAG using [scripts](./scripts/predcls_train_retag.sh)
 
 ```
 bash scripts/predcls_train_retag.sh
@@ -23,7 +22,10 @@ bash scripts/predcls_train_retag.sh
 
 ## Test
 
+You can check the result of ReTAG in [Model_Zoo.md](./Model_Zoo.md)
+
 We provide [scripts](./scripts/test.sh) for testing the models
+
 ```
 bash script/test.sh
 ```

@@ -4,7 +4,7 @@ Predictor="ReTAGPENet"
 
 ## Retrieval Module
 MEMORY_SIZE=8
-NUM_RETRIEVALS=10
+NUM_RETRIEVALS=20
 
 ## Reliable Selection
 THRESHOLD=0.3
@@ -33,10 +33,10 @@ PRE_TRAINED_PENET="checkpoints/PE-NET_PredCls/model_final.pth"
 mkdir ./checkpoints/predcls
 mkdir ./checkpoints/predcls/${MODEL_NAME}/
 
-OUTPUT_DIR="./checkpoints/predcls/${MODEL_NAME}/MIXUP(${MIXUP})BETA(${MIXUP_RATIO})_NUMRET(${NUM_RETRIEVALS})_THRESH(${THRESHOLD})_MEMORY_SIZE(${MEMORY_SIZE})"
+OUTPUT_DIR="./checkpoints/predcls/${MODEL_NAME}/MIXUP(${MIXUP})BETA(${MIXUP_ALPHA}_${MIXUP_BETA})_NUMRET(${NUM_RETRIEVALS})_THRESH(${THRESHOLD})_MEMORY_SIZE(${MEMORY_SIZE})"
 
 
-CUDA_VISIBLE_DEVICES=8 python3 tools/relation_train_net.py \
+CUDA_VISIBLE_DEVICES=0 python3 tools/relation_train_net.py \
   --config-file "configs/e2e_relation_X_101_32_8_FPN_1x_rasgg.yaml" \
   TYPE "retag" \
   REL_LOSS_TYPE $REL_LOSS_TYPE \

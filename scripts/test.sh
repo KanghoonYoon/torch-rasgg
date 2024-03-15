@@ -1,7 +1,7 @@
-export CUDA_VISIBLE_DEVICES=6
+export CUDA_VISIBLE_DEVICES=9
 export NUM_GUP=1
 
-output_dir="checkpoints/predcls/240306_ABLATION_IPS/MIXUP(True)(0.9)_COEF(0.0)_NUMRET(10)_THRESH(0.3)_MEMORY_SIZE(8)"
+output_dir="checkpoints/predcls/RETAG/MIXUP(True)BETA()_NUMRET(10)_THRESH(0.3)_MEMORY_SIZE(8)"
 model_dir="${output_dir}/model_0040000.pth"
 config_file="${output_dir}/config.yml"
 
