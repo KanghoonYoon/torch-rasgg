@@ -1,81 +1,53 @@
 export NUM_GUP=1
 
-# Predictor="RA-PENetCorrect"
-# Predictor="RA-PENetCorrectProto"
-# Predictor="RA-PENetCorrectRelMix"
-# Predictor="RA-PENetCorrectProtoBeta"
-Predictor="RA-PENetCorrectProtoBetaNOIPS"
-# Predictor="RA-PENetCorrectProtoBetaBG"
-# Predictor="RA-PENetCorrectProtoBetaFG"
-# Predictor="RA-PENetCorrectProtoBetaEnhanceBG"
+Predictor="ReTAGPENet"
 
-COEF1=0.0
-COEF2=0.0
-COEF3=1.0
-CONTRA_LOSS_COEF=0.0
-
+## Retrieval Module
 MEMORY_SIZE=8
-NUM_CORRECT_BG=1
 NUM_RETRIEVALS=10
+
+## Reliable Selection
 THRESHOLD=0.3
-# IMS_PER_BATCH=4
-IMS_PER_BATCH=6
+NUM_CORRECT_BG=1
+
+## Unbiased Augmentation
+MIXUP=True
+MIXUP_ALPHA=20
+MIXUP_BETA=5
 
 REL_LOSS_TYPE='ce'
-
-MIXUP=True
-MIXUP_RATIO=0.5
-
-
+IMS_PER_BATCH=6
 REWEIGHT_BETA=0.99999
+
 # PREDICT_USE_BIAS=True
 PREDICT_USE_BIAS=False
 
 MAX_ITER=60000
 VAL_PERIOD=2500
-
 BASE_LR=1e-3
-# BASE_LR=5e-5
 
-
-# MODEL_NAME='240219_CorrectLabel_FGBG_BASELR_SAMEMEMORY'
-# MODEL_NAME='240219_CorrectLabelProto_FGBG_BASELR_SAMEMEMORY'
-# MODEL_NAME='240215_CorrectLabelProto_FGBG_BASELR'
-# MODEL_NAME='240215_CorrectLabelRelMix_FGBG_BASELR'
-# MODEL_NAME='240224_CorrectLabelProtoBeta_BASELR'
-# MODEL_NAME='240225_CorrectLabelAblation(BG)_BASELR'
-# MODEL_NAME='240225_CorrectLabelAblation(FG)_BASELR'
-# MODEL_NAME='240302_CorrectLabelProtoBeta_BASELR'
-# MODEL_NAME='240306_ABLATION_IDENTIFICATION'
-MODEL_NAME='240306_ABLATION_IPS'
-
-
+MODEL_NAME='RETAG'
 
 PRE_TRAINED_PENET="checkpoints/PE-NET_SGCls/model_final.pth"
-# PRE_TRAINED_PENET="/home/public/Datasets/CV/faster_ckpt/vg_faster_det.pth"
 
 mkdir ./checkpoints/sgcls
 mkdir ./checkpoints/sgcls/${MODEL_NAME}/
 
-# OUTPUT_DIR="./checkpoints/sgcls/${MODEL_NAME}/MIXUP(${MIXUP})(${MIXUP_RATIO})_COEF(${CONTRA_LOSS_COEF})_NUMRET(${NUM_RETRIEVALS})_THRESH(${THRESHOLD})"
-# OUTPUT_DIR="./checkpoints/sgcls/${MODEL_NAME}/MIXUP(${MIXUP})(BETA(20_5))_COEF(${CONTRA_LOSS_COEF})_NUMRET(${NUM_RETRIEVALS})_THRESH(${THRESHOLD})"
+OUTPUT_DIR="./checkpoints/sgcls/${MODEL_NAME}/MIXUP(${MIXUP})BETA(${MIXUP_ALPHA}_${MIXUP_BETA})_NUMRET(${NUM_RETRIEVALS})_THRESH(${THRESHOLD})_MEMORY_SIZE(${MEMORY_SIZE})"
 
-OUTPUT_DIR="./checkpoints/sgcls/${MODEL_NAME}/MIXUP(${MIXUP})(BETA(20_5))_NUM_CORRECT_BG(${NUM_CORRECT_BG})_NUMRET(${NUM_RETRIEVALS})_THRESH(${THRESHOLD})"
 
-# /home/public/Datasets/CV/ckpt/faster_ckpt/vg_faster_det.pth
-# CUDA_VISIBLE_DEVICES=2,3 python -m torch.distributed.launch --nproc_per_node=2 --master_port=10110 tools/relation_train_net.py \
-CUDA_VISIBLE_DEVICES=6 python3 tools/relation_train_net.py \
+CUDA_VISIBLE_DEVICES=8 python3 tools/relation_train_net.py \
   --config-file "configs/e2e_relation_X_101_32_8_FPN_1x_rasgg.yaml" \
   TYPE "retag" \
   REL_LOSS_TYPE $REL_LOSS_TYPE \
   REWEIGHT_BETA $REWEIGHT_BETA \
   RASGG.MEMORY_SIZE $MEMORY_SIZE \
   RASGG.NUM_CORRECT_BG $NUM_CORRECT_BG \
-  RASGG.CONTRA_LOSS_COEF $CONTRA_LOSS_COEF \
   RASGG.NUM_RETRIEVALS $NUM_RETRIEVALS \
   RASGG.THRESHOLD $THRESHOLD \
   RASGG.MIXUP $MIXUP \
-  RASGG.MIXUP_RATIO $MIXUP_RATIO \
+  RASGG.MIXUP_ALPHA $MIXUP_ALPHA \
+  RASGG.MIXUP_BETA $MIXUP_BETA \
   MODEL.ROI_RELATION_HEAD.USE_GT_BOX True \
   MODEL.ROI_RELATION_HEAD.USE_GT_OBJECT_LABEL False \
   MODEL.ROI_RELATION_HEAD.PREDICT_USE_BIAS $PREDICT_USE_BIAS \
