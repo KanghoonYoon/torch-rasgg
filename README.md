@@ -12,7 +12,7 @@ Check [DATASET.md](./DATASET.md) for instructions of dataset preprocessing.
 ## Train
 ReTAG requires the pre-trained PE-Net and memory bank, which is populated with the relation embedding of training dataset.
 
-Please download the pre-trained model in this anonymous drive [link](https://).
+Please download the pre-trained model [link](https://) and the features for the [memory bank](https://drive.google.com/drive/folders/16sRrrmYfyK2jq12P0JUB7iXx8xG965tS?usp=sharing)
 
 You can train ReTAG using [scripts](./scripts/predcls_train_retag.sh)
 
