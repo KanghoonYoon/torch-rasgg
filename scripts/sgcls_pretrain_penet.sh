@@ -1,21 +1,18 @@
 export NUM_GUP=2
 
 Predictor="PrototypeEmbeddingNetwork"
+
 mkdir ./checkpoints/sgcls
 mkdir ./checkpoints/sgcls/${MODEL_NAME}
 
 REL_LOSS_TYPE="ce"
-# REL_LOSS_TYPE="ce_rwt"
 
 REWEIGHT_BETA=0.99999
-# PREDICT_USE_BIAS=True
+
 PREDICT_USE_BIAS=False
 
 OUTPUT_DIR="./checkpoints/PE-NET_SGCls"
-# MODEL_NAME="penet_rwt(${REWEIGHT_BETA})"
-# OUTPUT_DIR="./checkpoints/sgcls/${MODEL_NAME}/"
 
-# python3 tools/relation_train_net.py \
 CUDA_VISIBLE_DEVICES=8,9 python -m torch.distributed.launch --nproc_per_node=2 --master_port=29601 tools/relation_train_net.py \
   --config-file "configs/e2e_relation_X_101_32_8_FPN_1x.yaml" \
   TYPE None \

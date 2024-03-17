@@ -4,17 +4,13 @@ Predictor="PrototypeEmbeddingNetwork"
 mkdir ./checkpoints/sgdet
 
 REL_LOSS_TYPE="ce"
-# REL_LOSS_TYPE="ce_rwt"
 
 REWEIGHT_BETA=0.99999
-# PREDICT_USE_BIAS=True
 PREDICT_USE_BIAS=False
 IMS_PER_BATCH=12
 VAL_PERIOD=2500
 
 OUTPUT_DIR="./checkpoints/PE-NET_SGDet"
-# MODEL_NAME="penet_rwt(${REWEIGHT_BETA})"
-# OUTPUT_DIR="./checkpoints/sgcls/${MODEL_NAME}/"
 
 # python3 tools/relation_train_net.py \
 CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2 --master_port=19902 tools/relation_train_net.py \
