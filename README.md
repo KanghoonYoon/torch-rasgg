@@ -1,4 +1,4 @@
-# Re-TAG: Retrieval-Augmented Scene Graph Generation via Multi-Prototype Learning
+# RA-SGG: Retrieval-Augmented Scene Graph Generation Framework via Multi-Prototype Learning
 
 
 We refer to the implementation of PE-Net [PENet](https://github.com/VL-Group/PENET?tab=readme-ov-file). 
